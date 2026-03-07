@@ -77,7 +77,7 @@ type CreateBasicKeywordHandler = (key: string) => KeywordHandler;
 type GetArrayFromNumber = (number: number) => number[];
 type GetSourceHandle = (parentId: string, childId: string | null) => string;
 type GenerateSourceHandles = (key: string | undefined, value: unknown, nodeId: string, defs: boolean | undefined) => HandleConfig[];
-type UpdateNode = (node: UnpositionedGraphNode | undefined, update: UpdateNodeOptionalParameters) => void;
+type UpdateNode = (node: UnpositionedGraphNode, update: UpdateNodeOptionalParameters) => void;
 
 
 const neonColors = {
@@ -99,7 +99,7 @@ export const processAST: ProcessAST = ({ ast, schemaUri, nodes, edges, parentId,
         const sourceHandle = getSourceHandle(parentId, childId);
         const targetHandle = `${sourceHandle}-target`;
         const targetNode = renderedNodes.get(schemaUri);
-        const backEdgeColor = targetNode?.data.nodeStyle.color ?? "#CCCCCC";
+        const backEdgeColor = targetNode.data.nodeStyle.color ?? "#CCCCCC";
 
         edges.push({
             id: `${parentId}--${sourceHandle}--${schemaUri}--${targetHandle}`,
